@@ -5,8 +5,9 @@ metadata:
 spec:
   type: LoadBalancer
   ports:
-    - port: 80
-      targetPort: 8080
+    - protocol: TCP 
+      port: 80
+      targetPort: 80
   selector:
     app: x1frontend-k8s
 ---
@@ -19,8 +20,8 @@ spec:
   strategy:
     type: RollingUpdate
     rollingUpdate:
-      maxUnavailable: 2
-      maxSurge: 2
+      maxUnavailable: 25%
+      maxSurge: 25%
   selector:
     matchLabels:
       app: x1frontend-k8s
@@ -37,4 +38,5 @@ spec:
             readOnlyRootFilesystem: true
             allowPrivilegeEscalation: false
           ports:
-            - containerPort: 8080
+            - containerPort: 80
+              protocol: TCP
