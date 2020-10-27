@@ -6,8 +6,8 @@ spec:
   type: LoadBalancer
   ports:
     - protocol: TCP 
-      port: 80
-      targetPort: 80
+      port: 8080
+      targetPort: 5000
   selector:
     app: x1frontend-k8s
 ---
@@ -38,5 +38,5 @@ spec:
             readOnlyRootFilesystem: true
             allowPrivilegeEscalation: false
           ports:
-            - containerPort: 80
+            - containerPort: 5000
               protocol: TCP
